@@ -1,3 +1,3 @@
-Week 1
+## Week 1
 
-I've created my first GitHub page!
+# I've created my first GitHub page!

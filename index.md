@@ -4,7 +4,7 @@ Analysing ODD Data
 
 Here is the link to my analysis about Car Sales in Turkey on Aug 2018.
 
-Also you can find underlying data here.
+Also you can find underlying data [here](https://github.com/MEF-BDA503/pj18-orkunberkyuzbasioglu/blob/master/odd_retail_sales_2018_08.xlsx).
 
 ## Week 2
 

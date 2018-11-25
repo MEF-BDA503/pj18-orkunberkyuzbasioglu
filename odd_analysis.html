@@ -356,6 +356,7 @@ which(car_df$brand_name == &quot;TOPLAM:&quot;)</code></pre>
 <pre class="r"><code>#removing the rows
 toRemove &lt;- which(car_df$brand_name == &quot;TOPLAM:&quot;)
 car_df &lt;- car_df[-toRemove, ]
+car_df &lt;- car_df[-866, ]
 #Check whether there are still any rows fit brand_name == &quot;TOPLAM:&quot;
 which(car_df$brand_name == &quot;TOPLAM:&quot;)</code></pre>
 <pre><code>## integer(0)</code></pre>
@@ -366,10 +367,10 @@ car_df %&lt;&gt;% mutate(percent_comm_imp = comm_imp/comm_total)
 car_df %&lt;&gt;% mutate(percent_total_imp = total_imp/total_total)
 car_df %&lt;&gt;% mutate(percent_auto = auto_total/total_total)
 car_df %&lt;&gt;% mutate(percent_auto = comm_total/total_total) </code></pre>
-<p>Then we look first to the structure of the car_df and</p>
+<p>Then we look first to the structure of the car_df and also calculate some aggregate measures:</p>
 <pre class="r"><code>#Structure of car_df 
 glimpse(car_df)</code></pre>
-<pre><code>## Observations: 1,478
+<pre><code>## Observations: 1,477
 ## Variables: 16
 ## $ brand_name        &lt;chr&gt; &quot;ALFA ROMEO&quot;, &quot;ASTON MARTIN&quot;, &quot;AUDI&quot;, &quot;BENTL...
 ## $ auto_dom          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 632, 91, 1471, 46...
@@ -387,10 +388,10 @@ glimpse(car_df)</code></pre>
 ## $ percent_comm_imp  &lt;dbl&gt; NaN, NaN, NaN, NaN, NaN, 1.00000000, 1.00000...
 ## $ percent_total_imp &lt;dbl&gt; 1.0000000, 1.0000000, 1.0000000, NaN, 1.0000...
 ## $ percent_auto      &lt;dbl&gt; 0.00000000, 0.00000000, 0.00000000, NaN, 0.0...</code></pre>
-<pre class="r"><code>#Total Sales for each brand
+<pre class="r"><code>#Total Sales for each brand &amp; year sorted by the most sold brand
 car_df %&gt;% group_by(brand_name,year) %&gt;% summarise(totalsales = sum(auto_total)) %&gt;% arrange(desc(totalsales))</code></pre>
-<pre><code>## # A tibble: 138 x 3
-## # Groups:   brand_name [50]
+<pre><code>## # A tibble: 137 x 3
+## # Groups:   brand_name [49]
 ##    brand_name  year totalsales
 ##    &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 ##  1 RENAULT     2017     113454
@@ -403,13 +404,14 @@ car_df %&gt;% group_by(brand_name,year) %&gt;% summarise(totalsales = sum(auto_t
 ##  8 FIAT        2016      52369
 ##  9 HYUNDAI     2016      49518
 ## 10 HYUNDAI     2017      49281
-## # ... with 128 more rows</code></pre>
-<pre class="r"><code>car_df %&gt;% group_by(brand_name,year) %&gt;% summarise_each(funs(sum),auto_total,comm_total,total_total)  %&gt;% arrange(desc(total_total))                                                                 </code></pre>
+## # ... with 127 more rows</code></pre>
+<pre class="r"><code>#Total auto and commerial vehichle sales for each brand &amp; year sorted by the most total sales
+car_df %&gt;% group_by(brand_name,year) %&gt;% summarise_each(funs(sum),auto_total,comm_total,total_total)  %&gt;% arrange(desc(total_total))                                                                 </code></pre>
 <pre><code>## `summarise_each()` is deprecated.
 ## Use `summarise_all()`, `summarise_at()` or `summarise_if()` instead.
 ## To map `funs` over a selection of variables, use `summarise_at()`</code></pre>
-<pre><code>## # A tibble: 138 x 5
-## # Groups:   brand_name [50]
+<pre><code>## # A tibble: 137 x 5
+## # Groups:   brand_name [49]
 ##    brand_name  year auto_total comm_total total_total
 ##    &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
 ##  1 VOLKSWAGEN  2016     101763      32772      134535
@@ -422,7 +424,7 @@ car_df %&gt;% group_by(brand_name,year) %&gt;% summarise(totalsales = sum(auto_t
 ##  8 VOLKSWAGEN  2017      59098      17973       77071
 ##  9 RENAULT     2018      59761       6756       66517
 ## 10 OPEL        2016      55471          0       55471
-## # ... with 128 more rows</code></pre>
+## # ... with 127 more rows</code></pre>
 </div>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>

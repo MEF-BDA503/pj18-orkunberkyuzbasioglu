@@ -1,13 +1,16 @@
 ## Week 4
 
-Analysing EGM data
+### Analysing EGM data
 
 [Here](egm_analysis.html) is the link to my analysis about pension companies in Turkey for the years 2017 and 2018.
 
 Also you can find underlying data in xlsx format [here](https://github.com/MEF-BDA503/pj18-orkunberkyuzbasioglu/blob/master/egm_example_data.xlsx).
 
+### Analysing ODD data
 
+[Here](odd_analysis.html) is the link to my analysis about the data from the Turkish Automotive Distributors Association in Turkey for the years 2017 and 2018.
 
+Also you can find underlying data in rds format [here](https://github.com/MEF-BDA503/pj18-orkunberkyuzbasioglu/blob/master/egm_example_data.xlsx).
 
 ## Week 3 
 

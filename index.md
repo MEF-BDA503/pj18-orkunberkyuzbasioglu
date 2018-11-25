@@ -10,7 +10,7 @@ Also you can find underlying data in xlsx format [here](https://github.com/MEF-B
 
 [Here](odd_analysis.html) is the link to my analysis about the data from the Turkish Automotive Distributors Association in Turkey for the years 2017 and 2018.
 
-Also you can find underlying data in rds format [here](https://github.com/MEF-BDA503/pj18-orkunberkyuzbasioglu/blob/master/egm_example_data.xlsx).
+Also you can find underlying data in rds format [here](https://github.com/MEF-BDA503/pj18-orkunberkyuzbasioglu/blob/master/car_data_aggregate.rds).
 
 ## Week 3 
 

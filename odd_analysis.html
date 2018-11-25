@@ -359,6 +359,70 @@ car_df &lt;- car_df[-toRemove, ]
 #Check whether there are still any rows fit brand_name == &quot;TOPLAM:&quot;
 which(car_df$brand_name == &quot;TOPLAM:&quot;)</code></pre>
 <pre><code>## integer(0)</code></pre>
+<p>Then we introduce some new columns to the car_df, which can be useful for further analysis:</p>
+<pre class="r"><code>#Introducing some new columns
+car_df %&lt;&gt;% mutate(percent_auto_imp = auto_imp/auto_total)
+car_df %&lt;&gt;% mutate(percent_comm_imp = comm_imp/comm_total) 
+car_df %&lt;&gt;% mutate(percent_total_imp = total_imp/total_total)
+car_df %&lt;&gt;% mutate(percent_auto = auto_total/total_total)
+car_df %&lt;&gt;% mutate(percent_auto = comm_total/total_total) </code></pre>
+<p>Then we look first to the structure of the car_df and</p>
+<pre class="r"><code>#Structure of car_df 
+glimpse(car_df)</code></pre>
+<pre><code>## Observations: 1,478
+## Variables: 16
+## $ brand_name        &lt;chr&gt; &quot;ALFA ROMEO&quot;, &quot;ASTON MARTIN&quot;, &quot;AUDI&quot;, &quot;BENTL...
+## $ auto_dom          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 632, 91, 1471, 46...
+## $ auto_imp          &lt;dbl&gt; 13, 2, 350, 0, 158, 134, 1141, 9, 3, 57, 705...
+## $ auto_total        &lt;dbl&gt; 13, 2, 350, 0, 158, 134, 1141, 9, 3, 689, 79...
+## $ comm_dom          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 789, 1421, 0, 0, ...
+## $ comm_imp          &lt;dbl&gt; 0, 0, 0, 0, 0, 197, 319, 0, 0, 199, 139, 0, ...
+## $ comm_total        &lt;dbl&gt; 0, 0, 0, 0, 0, 197, 319, 0, 0, 988, 1560, 0,...
+## $ total_dom         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1421, 1512, 1471,...
+## $ total_imp         &lt;dbl&gt; 13, 2, 350, 0, 158, 331, 1460, 9, 3, 256, 84...
+## $ total_total       &lt;dbl&gt; 13, 2, 350, 0, 158, 331, 1460, 9, 3, 1677, 2...
+## $ year              &lt;dbl&gt; 2018, 2018, 2018, 2018, 2018, 2018, 2018, 20...
+## $ month             &lt;dbl&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,...
+## $ percent_auto_imp  &lt;dbl&gt; 1.00000000, 1.00000000, 1.00000000, NaN, 1.0...
+## $ percent_comm_imp  &lt;dbl&gt; NaN, NaN, NaN, NaN, NaN, 1.00000000, 1.00000...
+## $ percent_total_imp &lt;dbl&gt; 1.0000000, 1.0000000, 1.0000000, NaN, 1.0000...
+## $ percent_auto      &lt;dbl&gt; 0.00000000, 0.00000000, 0.00000000, NaN, 0.0...</code></pre>
+<pre class="r"><code>#Total Sales for each brand
+car_df %&gt;% group_by(brand_name,year) %&gt;% summarise(totalsales = sum(auto_total)) %&gt;% arrange(desc(totalsales))</code></pre>
+<pre><code>## # A tibble: 138 x 3
+## # Groups:   brand_name [50]
+##    brand_name  year totalsales
+##    &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+##  1 RENAULT     2017     113454
+##  2 RENAULT     2016     106616
+##  3 VOLKSWAGEN  2016     101763
+##  4 FIAT        2017      61364
+##  5 RENAULT     2018      59761
+##  6 VOLKSWAGEN  2017      59098
+##  7 OPEL        2016      55471
+##  8 FIAT        2016      52369
+##  9 HYUNDAI     2016      49518
+## 10 HYUNDAI     2017      49281
+## # ... with 128 more rows</code></pre>
+<pre class="r"><code>car_df %&gt;% group_by(brand_name,year) %&gt;% summarise_each(funs(sum),auto_total,comm_total,total_total)  %&gt;% arrange(desc(total_total))                                                                 </code></pre>
+<pre><code>## `summarise_each()` is deprecated.
+## Use `summarise_all()`, `summarise_at()` or `summarise_if()` instead.
+## To map `funs` over a selection of variables, use `summarise_at()`</code></pre>
+<pre><code>## # A tibble: 138 x 5
+## # Groups:   brand_name [50]
+##    brand_name  year auto_total comm_total total_total
+##    &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+##  1 VOLKSWAGEN  2016     101763      32772      134535
+##  2 RENAULT     2017     113454      16822      130276
+##  3 RENAULT     2016     106616      15091      121707
+##  4 FIAT        2017      61364      58685      120049
+##  5 FORD        2017      39850      71214      111064
+##  6 FORD        2016      41370      68234      109604
+##  7 FIAT        2016      52369      53737      106106
+##  8 VOLKSWAGEN  2017      59098      17973       77071
+##  9 RENAULT     2018      59761       6756       66517
+## 10 OPEL        2016      55471          0       55471
+## # ... with 128 more rows</code></pre>
 </div>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>

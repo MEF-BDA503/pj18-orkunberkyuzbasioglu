@@ -428,6 +428,26 @@ car_df %&gt;% group_by(brand_name,year) %&gt;% summarise_each(funs(sum),auto_tot
 ##  9 RENAULT     2018      59761       6756       66517
 ## 10 OPEL        2016      55471          0       55471
 ## # ... with 127 more rows</code></pre>
+<p>For visualization, we first find the top selling brands</p>
+<pre class="r"><code>#Top Sellers
+car_df %&gt;% select(brand_name,total_total,year) %&gt;% group_by(brand_name) %&gt;% 
+  summarise(totalSales = sum(total_total)) %&gt;% arrange(desc(totalSales))</code></pre>
+<pre><code>## # A tibble: 49 x 2
+##    brand_name    totalSales
+##    &lt;chr&gt;              &lt;dbl&gt;
+##  1 RENAULT           318500
+##  2 FIAT              275900
+##  3 FORD              271157
+##  4 VOLKSWAGEN        262041
+##  5 HYUNDAI           131666
+##  6 DACIA             117978
+##  7 OPEL              117122
+##  8 TOYOTA            106950
+##  9 PEUGEOT            98036
+## 10 MERCEDES-BENZ      93944
+## # ... with 39 more rows</code></pre>
+<pre class="r"><code>#Constructing a top_sellers vector
+top_sellers &lt;- c(&quot;RENAULT&quot;,&quot;FIAT&quot;,&quot;FORD&quot;,&quot;VOLKSWAGEN&quot;,&quot;HYUNDAI&quot;,&quot;DACIA&quot;,&quot;OPEL&quot;,&quot;TOYOTA&quot;,&quot;PEUGEOT&quot;,&quot;MERCEDES-BENZ&quot;)                                                         </code></pre>
 </div>
 <div id="plots" class="section level2">
 <h2>Plots</h2>
